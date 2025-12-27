@@ -1,0 +1,16 @@
+begin;
+
+do $$
+begin
+  if exists (select 1 from public.schema_migrations where version = '000X_name_here') then
+    raise notice 'Migration 000X_name_here already applied';
+    return;
+  end if;
+end $$;
+
+-- your SQL changes here
+
+insert into public.schema_migrations(version)
+values ('000X_name_here');
+
+commit;
